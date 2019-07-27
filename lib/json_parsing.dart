@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_sample/book.dart';
 
-Book parseBook(String jsonString) {
+Future<List<Books>> parseBooks(String jsonString) async {
   final parsed = json.decode(jsonString);
-  return Book.fromJson(parsed);
+  final books = ApiResult.fromJson(parsed).results.books;
+  return books;
 }
