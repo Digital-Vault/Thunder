@@ -6,13 +6,89 @@
 
 //packages
 import 'dart:math';
-
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
-
+import "json_parsing.dart";
+import "book.dart";
 //executing function
 void main() => (runApp(ShoppingCartApp()));
 
+class ShoppingCartApp extends StatelessWidget {
+
+  Future<List<Books>> books() async {
+    var jsonData = await rootBundle.loadString('assets/test.json');
+    Future<List<Books>> BookList = parseBooks(jsonData);
+    return BookList;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Shopping Cart',
+
+      home: Scaffold(appBar: AppBar(title: Text('Book Store'),
+      ),
+          body: new FutureBuilder<List<Books>>(
+          future: books(),
+          builder: (context, snapshot){
+            if (!snapshot.hasData)
+              return new Container();
+            List<Books> books = snapshot.data ?? [];
+            return ListView.builder(
+              padding: const EdgeInsets.all(32.0),
+              itemCount: books.length,
+              itemBuilder: (BuildContext context, int index) {
+                Books book = books[index];
+                return new Padding(padding: new EdgeInsets.all(10.0),
+                    child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(book.title, textAlign: TextAlign.left, style: new TextStyle(fontSize: 20.0, color: Colors.black)),
+                          ),
+                          Expanded(
+                            child: Text( "\$ " + book.price.toString(), textAlign: TextAlign.right, style: new TextStyle(fontSize: 20.0, color: Colors.black)),
+                          ),
+                        ]));
+              },
+
+            );
+          }
+
+      )
+        )
+      /*new FutureBuilder<List<Books>>(
+        future: books(),
+          builder: (context, snapshot){
+            if (!snapshot.hasData)
+              return new Container();
+            List<Books> books = snapshot.data ?? [];
+            return ListView.builder(
+              padding: const EdgeInsets.all(32.0),
+              itemCount: books.length,
+              itemBuilder: (BuildContext context, int index) {
+                Books book = books[index];
+                return new Padding(padding: new EdgeInsets.all(10.0),
+                    child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(book.title, textAlign: TextAlign.left, style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                      ),
+                      Expanded(
+                        child: Text(book.price.toString(), textAlign: TextAlign.right, style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                      ),
+                    ]));
+              },
+
+            );
+          }
+
+      ), */
+    );
+  }
+}
+
 //main class that defines global themes and links other classes
+/*
 class ShoppingCartApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +101,8 @@ class ShoppingCartApp extends StatelessWidget {
     );
   }
 }
-
+*/
+/*
 //create a stateful widget from the list of items
 class ShoppingCart extends StatefulWidget {
   @override
@@ -43,11 +120,25 @@ class ItemList extends State {
         ),
         body: _buildAllItems());
   }
-
+  Future<List<Books>> books() async {
+    var jsonData = await rootBundle.loadString('assets/test.json');
+    Future<List<Books>> BookList = parseBooks(jsonData);
+    return BookList;
+  }
   //row widget containing data
-  Widget _buildRowItem(int i) {
+  Widget _buildRowItem(int i){
+    FutureBuilder<List<Books>>(future: books(),
+        builder: (context, snapshot){
+          if (!snapshot.hasData)
+            return new Container(
+              child: new Text("error"),
+            );
+          List<Books> books = snapshot.data ?? [];
+          Books book = books[i];
+        },
+    );
     var randomPrice = new Random();
-    String item = "Item #" + i.toString();
+    String item = "Title: " + i.toString();
     String price = "Price: \$" + randomPrice.nextInt(1000).toString();
     var itemRow =
         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -104,3 +195,4 @@ class ItemDetail extends StatelessWidget {
     );
   }
 }
+*/
