@@ -1,6 +1,6 @@
+@Skip("Needs to be moved to bloc")
 import 'dart:io';
 
-import 'package:flutter_sample/json_parsing.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

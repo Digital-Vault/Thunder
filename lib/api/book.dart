@@ -1,78 +1,7 @@
-class ApiResult {
-  final String status;
-  final String copyright;
-  final int numResults;
-  final String lastModified;
-  final Results results;
+import 'buy_links.dart';
+import 'isbns.dart';
 
-  const ApiResult(
-      {this.status,
-      this.copyright,
-      this.numResults,
-      this.lastModified,
-      this.results});
-
-  factory ApiResult.fromJson(Map<String, dynamic> json) {
-    return ApiResult(
-        status: json['status'],
-        copyright: json['copyright'],
-        numResults: json['num_results'],
-        lastModified: json['last_modified'],
-        results: Results.fromJson(json['results']));
-  }
-}
-
-class Results {
-  final String listName;
-  final String listNameEncoded;
-  final String bestsellersDate;
-  final String publishedDate;
-  final String publishedDateDescription;
-  final String nextPublishedDate;
-  final String previousPublishedDate;
-  final String displayName;
-  final int normalListEndsAt;
-  final String updated;
-  final List<Books> books;
-
-  const Results(
-      {this.listName,
-      this.listNameEncoded,
-      this.bestsellersDate,
-      this.publishedDate,
-      this.publishedDateDescription,
-      this.nextPublishedDate,
-      this.previousPublishedDate,
-      this.displayName,
-      this.normalListEndsAt,
-      this.updated,
-      this.books});
-
-  factory Results.fromJson(Map<String, dynamic> json) {
-    return Results(
-        listName: json['list_name'],
-        listNameEncoded: json['list_name_encoded'],
-        bestsellersDate: json['bestsellers_date'],
-        publishedDate: json['published_date'],
-        publishedDateDescription: json['published_date_description'],
-        nextPublishedDate: json['next_published_date'],
-        previousPublishedDate: json['previous_published_date'],
-        displayName: json['display_name'],
-        normalListEndsAt: json['normal_list_ends_at'],
-        updated: json['updated'],
-        books: _findBooks(json['books']));
-  }
-
-  static List<Books> _findBooks(List<dynamic> books) {
-    List<Books> bookList = [];
-    books.forEach((v) {
-      bookList.add(Books.fromJson(v));
-    });
-    return bookList;
-  }
-}
-
-class Books {
+class Book {
   final int rank;
   final int rankLastWeek;
   final int weeksOnList;
@@ -99,7 +28,7 @@ class Books {
   final List<Isbns> isbns;
   final List<BuyLinks> buyLinks;
 
-  const Books(
+  const Book(
       {this.rank,
       this.rankLastWeek,
       this.weeksOnList,
@@ -126,8 +55,8 @@ class Books {
       this.isbns,
       this.buyLinks});
 
-  factory Books.fromJson(Map<String, dynamic> json) {
-    return Books(
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(
         rank: json['rank'],
         rankLastWeek: json['rank_last_week'],
         weeksOnList: json['weeks_on_list'],
@@ -170,27 +99,5 @@ class Books {
     });
 
     return buyLinks;
-  }
-}
-
-class Isbns {
-  final String isbn10;
-  final String isbn13;
-
-  const Isbns({this.isbn10, this.isbn13});
-
-  factory Isbns.fromJson(Map<String, dynamic> json) {
-    return Isbns(isbn10: json['isbn10'], isbn13: json['isbn13']);
-  }
-}
-
-class BuyLinks {
-  final String name;
-  final String url;
-
-  const BuyLinks({this.name, this.url});
-
-  factory BuyLinks.fromJson(Map<String, dynamic> json) {
-    return BuyLinks(name: json['name'], url: json['url']);
   }
 }
