@@ -2,7 +2,8 @@ name: flutter_sample
 description: "A new Flutter project."
 version: 1.0.0+1
 
-dependencies: 
+dependencies:
+  eva_icons_flutter: ^1.0.4
   cupertino_icons: ^0.1.2
   rxdart: ^0.22.1
   flutter: 

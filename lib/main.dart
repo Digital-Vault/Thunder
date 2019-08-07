@@ -2,7 +2,9 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'api/book.dart';
 import 'book_provider.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
+//executing function
 void main() => (runApp(BookProvider(child: ShoppingCartApp())));
 
 class ShoppingCartApp extends StatelessWidget {
@@ -41,24 +43,70 @@ class ShoppingCartApp extends StatelessWidget {
   Widget _buildListView(UnmodifiableListView<Book> books) {
     return ListView(
       padding: const EdgeInsets.all(32.0),
-      children: books.map(_buildRow).toList(),
+      children: books.map(_buildCard).toList(),
     );
   }
 
-  Widget _buildRow(Book book) {
+  Widget _buildCard(Book book) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      margin: EdgeInsets.all(10),
+      child: _builCardColumn(book),
+    );
+  }
+
+  Widget _builCardColumn(Book book) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildImage(book),
+        _buildPadding(book),
+        _buildButtons(),
+      ],
+    );
+  }
+
+  Widget _buildImage(Book book) {
+    return Image.network(book.bookImage);
+  }
+
+  Widget _buildPadding(Book book) {
     return Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Expanded(
-            child: Text(book.title,
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20.0, color: Colors.black)),
-          ),
-          Expanded(
-            child: Text("\$ " + book.price.toString(),
-                textAlign: TextAlign.right,
-                style: new TextStyle(fontSize: 20.0, color: Colors.black)),
-          ),
-        ]));
+      padding: EdgeInsets.all(17),
+      child: _buildTitleAndDescription(book),
+    );
+  }
+
+  Widget _buildTitleAndDescription(Book book) {
+    return ListTile(
+      title: Text(book.title),
+      subtitle: Text(book.description),
+    );
+  }
+
+  Widget _buildButtons() {
+    return ButtonTheme.bar(
+        child: ButtonBar(
+      children: [
+        _buildBuyButton(),
+        _buildFavouriteButton(),
+      ],
+    ));
+  }
+
+  Widget _buildBuyButton() {
+    return FlatButton(
+      child: const Text("Buy book"),
+      onPressed: () {},
+    );
+  }
+
+  Widget _buildFavouriteButton() {
+    return IconButton(
+      icon: Icon(EvaIcons.heart),
+      onPressed: () {},
+    );
   }
 }
