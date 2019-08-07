@@ -5,58 +5,40 @@
 */
 
 //packages
+import 'dart:collection';
 import 'dart:math';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
-import "json_parsing.dart";
-import "book.dart";
+import 'api/book.dart';
+import 'book_provider.dart';
+
 //executing function
-void main() => (runApp(ShoppingCartApp()));
+void main() => (runApp(BookProvider(child: ShoppingCartApp())));
 
 class ShoppingCartApp extends StatelessWidget {
-
-  Future<List<Books>> books() async {
-    var jsonData = await rootBundle.loadString('assets/test.json');
-    Future<List<Books>> BookList = parseBooks(jsonData);
-    return BookList;
-  }
   @override
   Widget build(BuildContext context) {
+    final bloc = BookProvider.of(context);
+
     return MaterialApp(
-      title: 'Shopping Cart',
-
-      home: Scaffold(appBar: AppBar(title: Text('Book Store'),
-      ),
-          body: new FutureBuilder<List<Books>>(
-          future: books(),
-          builder: (context, snapshot){
-            if (!snapshot.hasData)
-              return new Container();
-            List<Books> books = snapshot.data ?? [];
-            return ListView.builder(
-              padding: const EdgeInsets.all(32.0),
-              itemCount: books.length,
-              itemBuilder: (BuildContext context, int index) {
-                Books book = books[index];
-                return new Padding(padding: new EdgeInsets.all(10.0),
-                    child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(book.title, textAlign: TextAlign.left, style: new TextStyle(fontSize: 20.0, color: Colors.black)),
-                          ),
-                          Expanded(
-                            child: Text( "\$ " + book.price.toString(), textAlign: TextAlign.right, style: new TextStyle(fontSize: 20.0, color: Colors.black)),
-                          ),
-                        ]));
+        title: 'Shopping Cart',
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text('Book Store'),
+            ),
+            body: StreamBuilder<UnmodifiableListView<Book>>(
+              stream: bloc.books,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return Text("NO DATA");
+                return ListView(
+                  padding: const EdgeInsets.all(32.0),
+                  children: snapshot.data.map(_buildRow).toList(),
+                );
               },
+            )));
 
-            );
-          }
-
-      )
-        )
-      /*new FutureBuilder<List<Books>>(
+    /*new FutureBuilder<List<Books>>(
         future: books(),
           builder: (context, snapshot){
             if (!snapshot.hasData)
@@ -83,7 +65,23 @@ class ShoppingCartApp extends StatelessWidget {
           }
 
       ), */
-    );
+  }
+
+  Widget _buildRow(Book book) {
+    return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Expanded(
+            child: Text(book.title,
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 20.0, color: Colors.black)),
+          ),
+          Expanded(
+            child: Text("\$ " + book.price.toString(),
+                textAlign: TextAlign.right,
+                style: new TextStyle(fontSize: 20.0, color: Colors.black)),
+          ),
+        ]));
   }
 }
 
