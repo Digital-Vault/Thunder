@@ -9,16 +9,18 @@ import 'book_api_provider.dart';
 /// This is the business logic component that handles all business
 /// logic about books.
 class BookBloc {
-  final _provider = BookApiProvider();
-  final _booksSubject = BehaviorSubject<UnmodifiableListView<Book>>();
-  var _books = <Book>[];
-
+  /// Creates a bloc and fetches the data.
   BookBloc() {
     _updateBooks().then((_) {
       _booksSubject.add(UnmodifiableListView(_books));
     });
   }
 
+  final _provider = BookApiProvider();
+  final _booksSubject = BehaviorSubject<UnmodifiableListView<Book>>();
+  var _books = <Book>[];
+
+  /// The list of books.
   Stream<UnmodifiableListView<Book>> get books => _booksSubject.stream;
 
   Future<List<Book>> _updateBooks() async {
@@ -27,6 +29,7 @@ class BookBloc {
     return books;
   }
 
+  /// Closes all the Sinks and Streams.
   void dispose() {
     _booksSubject.close();
   }

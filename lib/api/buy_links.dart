@@ -1,10 +1,15 @@
+/// A structure for available places to purchase the book.
 class BuyLinks {
-  final String name;
-  final String url;
-
+  /// Creates a [BuyLinks] object.
   const BuyLinks({this.name, this.url});
 
-  factory BuyLinks.fromJson(Map<String, dynamic> json) {
-    return BuyLinks(name: json['name'], url: json['url']);
-  }
+  /// Creates a [BuyLinks] object from [json].
+  factory BuyLinks.fromJson(Map<String, dynamic> json) =>
+      BuyLinks(name: json['name'], url: json['url']);
+
+  /// Name of supplier.
+  final String name;
+
+  /// Purchase URL.
+  final String url;
 }

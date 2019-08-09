@@ -1,25 +1,24 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'api/book.dart';
-import 'book_provider.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
-//executing function
-void main() => (runApp(BookProvider(child: ShoppingCartApp())));
+import 'api/book.dart';
+import 'book_provider.dart';
 
+void main() => runApp(BookProvider(child: ShoppingCartApp()));
+
+/// Main widget
 class ShoppingCartApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shopping Cart',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Book Store'),
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Shopping Cart',
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Book Store'),
+          ),
+          body: _buildBody(context),
         ),
-        body: _buildBody(context),
-      ),
-    );
-  }
+      );
 
   Widget _buildBody(BuildContext context) {
     final bookBloc = BookProvider.of(context);
@@ -36,77 +35,58 @@ class ShoppingCartApp extends StatelessWidget {
     return _buildListView(snapshot.data);
   }
 
-  Widget _buildProgressBar() {
-    return Center(child: CircularProgressIndicator());
-  }
+  Widget _buildProgressBar() =>
+      Center(child: const CircularProgressIndicator());
 
-  Widget _buildListView(UnmodifiableListView<Book> books) {
-    return ListView(
-      padding: const EdgeInsets.all(32.0),
-      children: books.map(_buildCard).toList(),
-    );
-  }
+  Widget _buildListView(UnmodifiableListView<Book> books) => ListView(
+        padding: const EdgeInsets.all(32),
+        children: books.map(_buildCard).toList(),
+      );
 
-  Widget _buildCard(Book book) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      margin: EdgeInsets.all(10),
-      child: _builCardColumn(book),
-    );
-  }
+  Widget _buildCard(Book book) => Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.all(10),
+        child: _buildCardColumn(book),
+      );
 
-  Widget _builCardColumn(Book book) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _buildImage(book),
-        _buildPadding(book),
-        _buildButtons(),
-      ],
-    );
-  }
+  Widget _buildCardColumn(Book book) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildImage(book),
+          _buildPadding(book),
+          _buildButtons(),
+        ],
+      );
 
-  Widget _buildImage(Book book) {
-    return Image.network(book.bookImage);
-  }
+  Widget _buildImage(Book book) => Image.network(book.bookImage);
 
-  Widget _buildPadding(Book book) {
-    return Padding(
-      padding: EdgeInsets.all(17),
-      child: _buildTitleAndDescription(book),
-    );
-  }
+  Widget _buildPadding(Book book) => Padding(
+        padding: const EdgeInsets.all(17),
+        child: _buildTitleAndDescription(book),
+      );
 
-  Widget _buildTitleAndDescription(Book book) {
-    return ListTile(
-      title: Text(book.title),
-      subtitle: Text(book.description),
-    );
-  }
+  Widget _buildTitleAndDescription(Book book) => ListTile(
+        title: Text(book.title),
+        subtitle: Text(book.description),
+      );
 
-  Widget _buildButtons() {
-    return ButtonTheme.bar(
-        child: ButtonBar(
-      children: [
-        _buildBuyButton(),
-        _buildFavouriteButton(),
-      ],
-    ));
-  }
+  Widget _buildButtons() => ButtonTheme.bar(
+          child: ButtonBar(
+        children: [
+          _buildBuyButton(),
+          _buildFavoriteButton(),
+        ],
+      ));
 
-  Widget _buildBuyButton() {
-    return FlatButton(
-      child: const Text("Buy book"),
-      onPressed: () {},
-    );
-  }
+  Widget _buildBuyButton() => FlatButton(
+        onPressed: () {},
+        child: const Text('Buy book'),
+      );
 
-  Widget _buildFavouriteButton() {
-    return IconButton(
-      icon: Icon(EvaIcons.heart),
-      onPressed: () {},
-    );
-  }
+  Widget _buildFavoriteButton() => IconButton(
+        icon: Icon(EvaIcons.heart),
+        onPressed: () {},
+      );
 }
