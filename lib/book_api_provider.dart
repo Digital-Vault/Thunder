@@ -5,15 +5,15 @@ import 'package:flutter/services.dart';
 import 'api/api_result.dart';
 import 'api/book.dart';
 
-
+/// A class fetches the book details.
 class BookApiProvider {
-  Future<String> fetchApiResult() async {
-    return rootBundle.loadString('assets/test.json');
-  }
+  Future<String> _fetchApiResult() async =>
+      rootBundle.loadString('assets/test.json');
 
+  /// Fetches all the books in Hardcore Fiction category.
   Future<List<Book>> fetchHardcoreFictionBooks() async {
-    var data = await fetchApiResult();
-    var parsedData = json.decode(data);
+    final data = await _fetchApiResult();
+    final Map<String, dynamic> parsedData = json.decode(data);
     return ApiResult.fromJson(parsedData).results.books;
   }
 }
