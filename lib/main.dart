@@ -1,9 +1,16 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'api/book.dart';
 import 'book_provider.dart';
+
+/// Height of the book cover image from NY Times API
+const double bookCoverHeight = 495;
+
+/// Width of the book cover image from NY Times API
+const double bookCoverWidth = 328;
 
 void main() => runApp(BookProvider(child: ShoppingCartApp()));
 
@@ -60,7 +67,12 @@ class ShoppingCartApp extends StatelessWidget {
         ],
       );
 
-  Widget _buildImage(Book book) => Image.network(book.bookImage);
+  Widget _buildImage(Book book) => FadeInImage.memoryNetwork(
+        placeholder: kTransparentImage,
+        image: book.bookImage,
+        height: bookCoverHeight,
+        width: bookCoverWidth,
+      );
 
   Widget _buildPadding(Book book) => Padding(
         padding: const EdgeInsets.all(17),
