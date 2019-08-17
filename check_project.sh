@@ -2,4 +2,4 @@
   
   flutter format --dry-run --set-exit-if-changed .
   flutter analyze
-  flutter test test
+  flutter test --coverage test
