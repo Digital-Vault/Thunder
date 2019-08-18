@@ -1,0 +1,49 @@
+{
+    "rank": 1,
+    "rank_last_week": 0,
+    "weeks_on_list": 1,
+    "asterisk": 0,
+    "dagger": 0,
+    "primary_isbn10": "0062834835",
+    "primary_isbn13": "9780062834836",
+    "publisher": "Harper",
+    "description": "Gabriel Allon, the chief of Israeli intelligence, partners with the crown prince of Saudi Arabia, whose daughter is kidnapped.",
+    "price": 0,
+    "title": "THE NEW GIRL",
+    "author": "Daniel Silva",
+    "contributor": "by Daniel Silva",
+    "contributor_note": "",
+    "book_image": "https://s1.nyt.com/du/books/images/9780062834898.jpg",
+    "book_image_width": 328,
+    "book_image_height": 495,
+    "amazon_product_url": "https://www.amazon.com/New-Girl-Novel-Gabriel-Allon-ebook/dp/B07F18LND4?tag=NYTBS-20",
+    "age_group": "",
+    "book_review_link": "",
+    "first_chapter_link": "",
+    "sunday_review_link": "",
+    "article_chapter_link": "",
+    "isbns": [
+        {
+            "isbn10": "0062834835",
+            "isbn13": "9780062834836"
+        },
+        {
+            "isbn10": "0062834894",
+            "isbn13": "9780062834898"
+        }
+    ],
+    "buy_links": [
+        {
+            "name": "Local Booksellers",
+            "url": "http://www.indiebound.org/book/9780062834836?aff=NYT"
+        },
+        {
+            "name": "Barnes and Noble",
+            "url": "http://www.anrdoezrs.net/click-7990613-11819508?url=http%3A%2F%2Fwww.barnesandnoble.com%2Fw%2F%3Fean%3D9780062834836"
+        },
+        {
+            "name": "Amazon",
+            "url": "https://www.amazon.com/New-Girl-Novel-Gabriel-Allon-ebook/dp/B07F18LND4?tag=NYTBS-20"
+        }
+    ]
+}
