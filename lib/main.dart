@@ -5,13 +5,16 @@ import 'api/book.dart';
 import 'book_card.dart';
 import 'book_provider.dart';
 
+import 'login_page.dart';
+
 /// Height of the book cover image from NY Times API
 const double bookCoverHeight = 495;
 
 /// Width of the book cover image from NY Times API
 const double bookCoverWidth = 328;
 
-void main() => runApp(BookProvider(child: ShoppingCartApp()));
+void main() => runApp(LoginPage());
+//void main() => runApp(BookProvider(child: ShoppingCartApp()));
 
 /// Main widget
 class ShoppingCartApp extends StatelessWidget {
