@@ -9,17 +9,7 @@ import 'book_provider.dart';
 /// Main widget
 class ShoppingCartApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Shopping Cart',
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Book Store'),
-          ),
-          body: _buildBody(context),
-        ),
-      );
-
-  Widget _buildBody(BuildContext context) {
+  Widget build(BuildContext context) {
     final bookBloc = BookProvider.of(context);
     return StreamBuilder<UnmodifiableListView<Book>>(
       stream: bookBloc.books,

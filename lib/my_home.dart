@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/shopping_cart_app.dart';
+
+/// An enum representing different contents in home page.
+enum Page {
+  /// The list of available books.
+  books,
+
+  /// The list of favorite books.
+  favorites
+}
 
 /// A home screen for the app.
 ///
@@ -10,7 +20,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  int _selectedIndex = 0;
+  int _selectedIndex = Page.books.index;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -28,7 +38,17 @@ class _MyHomeState extends State<MyHome> {
         title: const Text('Book Store'),
       );
 
-  Widget _buildBody() => Center();
+  Widget _buildBody() {
+    Widget content;
+
+    if (_selectedIndex == Page.books.index) {
+      content = ShoppingCartApp();
+    }
+
+    return Center(
+      child: content,
+    );
+  }
 
   BottomNavigationBar _buildBottomNavigation() => BottomNavigationBar(
         items: [
