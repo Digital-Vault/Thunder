@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/favorite_books.dart';
 import 'package:flutter_sample/shopping_cart_app.dart';
 
 /// An enum representing different contents in home page.
@@ -43,6 +44,8 @@ class _MyHomeState extends State<MyHome> {
 
     if (_selectedIndex == Page.books.index) {
       content = ShoppingCartApp();
+    } else {
+      content = FavoriteBooks();
     }
 
     return Center(
