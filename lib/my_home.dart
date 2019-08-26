@@ -45,7 +45,7 @@ class _MyHomeState extends State<MyHome> {
     if (_selectedIndex == Page.books.index) {
       content = ShoppingCartApp();
     } else {
-      content = FavoriteBooks();
+      content = const FavoriteBooks();
     }
 
     return Center(

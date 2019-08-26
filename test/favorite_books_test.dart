@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter_sample/no_favorites.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/api/book.dart';
@@ -20,7 +21,7 @@ void main() {
       bookBloc: mockBloc,
       child: MaterialApp(
         home: Scaffold(
-          body: FavoriteBooks(),
+          body: const FavoriteBooks(),
         ),
       ),
     );
@@ -49,11 +50,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    final text = find.text('Try Liking A book And It Will Show Up Here.');
-    expect(text, findsOneWidget);
-
-    final image = find.byType(Image);
-    expect(image, findsOneWidget);
+    final noFavoritesFinder = find.byType(NoFavorites);
+    expect(noFavoritesFinder, findsOneWidget);
   });
 
   testWidgets('One favorite book smoke test', (tester) async {
