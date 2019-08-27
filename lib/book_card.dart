@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_sample/book_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import 'api/book.dart';
 import 'book_provider.dart';
+import 'detail_page.dart';
 
 /// Height of the book cover image from NY Times API
 const double bookCoverHeight = 495;
@@ -31,16 +31,16 @@ class BookCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       margin: const EdgeInsets.all(10),
-      child: _buildCardColumn(bookBloc),
+      child: _buildCardColumn(context, bookBloc),
     );
   }
 
-  Widget _buildCardColumn(BookBloc bookBloc) => Column(
+  Widget _buildCardColumn(BuildContext context, BookBloc bookBloc) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildImage(),
           _buildPadding(),
-          _buildButtons(bookBloc),
+          _buildButtons(context, bookBloc),
         ],
       );
 
@@ -61,21 +61,34 @@ class BookCard extends StatelessWidget {
         subtitle: Text(book.description),
       );
 
-  Widget _buildButtons(BookBloc bookBloc) => ButtonTheme.bar(
+  Widget _buildButtons(BuildContext context, BookBloc bookBloc) =>
+      ButtonTheme.bar(
           child: ButtonBar(
         children: [
-          _buildBuyButton(),
+          _buildBuyButton(context),
           _buildFavoriteButton(bookBloc),
         ],
       ));
 
-  Widget _buildBuyButton() => FlatButton(
-        onPressed: () {},
+  Widget _buildBuyButton(BuildContext context) => FlatButton(
+        onPressed: () {
+          _loadDetailPage(context, book);
+        },
         child: const Text('Buy book'),
       );
 
+  void _loadDetailPage(BuildContext context, Book book) {
+    Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) => DetailPage(
+            book: book,
+          ),
+        ));
+  }
+
   Widget _buildFavoriteButton(BookBloc bookBloc) => IconButton(
-        icon: Icon(EvaIcons.heart,
+        icon: Icon(book.favorite ? Icons.favorite : Icons.favorite_border,
             color: book.favorite ? Colors.red : Colors.black),
         onPressed: () {
           bookBloc.toggleFavorite.add(book.primaryIsbn13);

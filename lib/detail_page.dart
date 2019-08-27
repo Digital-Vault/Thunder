@@ -15,16 +15,33 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: _appBar(book),
+        appBar: _appBar(context),
         body: _list(),
       );
 
-  Widget _appBar(Book book) => AppBar(title: Text(book.title), actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.favorite),
-        )
-      ]);
+  Widget _appBar(BuildContext context) => AppBar(
+        title: Text(book.title),
+        actions: [
+          _buildFavoriteIcon(),
+        ],
+      );
+
+  Widget _buildFavoriteIcon() {
+    Icon icon;
+    if (book.favorite) {
+      icon = Icon(
+        Icons.favorite,
+        color: Colors.red,
+      );
+    } else {
+      icon = Icon(Icons.favorite_border);
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: icon,
+    );
+  }
 
   Widget _list() => ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
