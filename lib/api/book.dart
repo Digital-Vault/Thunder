@@ -1,11 +1,12 @@
 import 'buy_links.dart';
 import 'isbns.dart';
 
-/// A strucutre for a book fom API
+/// A structure for a book fom API
 class Book {
   /// Creates [Book].
-  const Book(
-      {this.rank,
+  Book(
+      {this.favorite = false,
+      this.rank,
       this.rankLastWeek,
       this.weeksOnList,
       this.asterisk,
@@ -58,6 +59,9 @@ class Book {
       articleChapterLink: json['article_chapter_link'],
       isbns: _findIsbns(json['isbns']),
       buyLinks: _findBuyLinks(json['buy_links']));
+
+  /// Favorite status of book.
+  bool favorite;
 
   /// Rank in the list.
   final int rank;
