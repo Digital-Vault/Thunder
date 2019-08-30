@@ -28,7 +28,7 @@ class ShoppingCartApp extends StatelessWidget {
       Center(child: const CircularProgressIndicator());
 
   Widget _buildListView(UnmodifiableListView<Book> books) => ListView(
-        padding: const EdgeInsets.all(32),
+        // padding: const EdgeInsets.all(8),
         children: books.map(_buildCard).toList(),
       );
 
