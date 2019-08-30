@@ -24,12 +24,7 @@ class _MyHomeState extends State<MyHome> {
   int _selectedIndex = Page.books.index;
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Shopping Cart',
-        home: _buildScaffold(),
-      );
-
-  Widget _buildScaffold() => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
         bottomNavigationBar: _buildBottomNavigation(),
