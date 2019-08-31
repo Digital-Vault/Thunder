@@ -68,17 +68,18 @@ class _LoginFormState extends State<LoginForm> {
         padding: const EdgeInsets.all(16),
         child: RaisedButton(
           onPressed: _onPressed,
-          child: const Text('Login', style: TextStyle(fontSize: 23)),
+          child: const Text('LOGIN', style: TextStyle(fontSize: 23)),
         ),
       );
 
   void _onPressed() {
     if (_formKey.currentState.validate()) {
       Navigator.pushReplacement(
-          _formKey.currentContext,
-          MaterialPageRoute<Widget>(
-            builder: _buildRoute,
-          ));
+        _formKey.currentContext,
+        MaterialPageRoute<Widget>(
+          builder: _buildRoute,
+        ),
+      );
     }
   }
 
