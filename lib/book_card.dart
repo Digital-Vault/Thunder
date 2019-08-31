@@ -6,12 +6,6 @@ import 'api/book.dart';
 import 'book_provider.dart';
 import 'detail_page.dart';
 
-/// Height of the book cover image from NY Times API
-const double bookCoverHeight = 495;
-
-/// Width of the book cover image from NY Times API
-const double bookCoverWidth = 328;
-
 /// A Book Card based on the material design card.
 class BookCard extends StatelessWidget {
   /// Creates a book card.
@@ -30,13 +24,13 @@ class BookCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(16),
       child: _buildCardColumn(context, bookBloc),
     );
   }
 
   Widget _buildCardColumn(BuildContext context, BookBloc bookBloc) => Column(
-        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildImage(),
           _buildPadding(),
@@ -45,20 +39,19 @@ class BookCard extends StatelessWidget {
       );
 
   Widget _buildImage() => FadeInImage.memoryNetwork(
+        fit: BoxFit.cover,
         placeholder: kTransparentImage,
         image: book.bookImage,
-        height: bookCoverHeight,
-        width: bookCoverWidth,
       );
 
   Widget _buildPadding() => Padding(
-        padding: const EdgeInsets.all(17),
-        child: _buildTitleAndDescription(),
+        padding: const EdgeInsets.only(top: 16),
+        child: _buildTitle(),
       );
 
-  Widget _buildTitleAndDescription() => ListTile(
+  Widget _buildTitle() => ListTile(
         title: Text(book.title),
-        subtitle: Text(book.description),
+        subtitle: Text(book.author),
       );
 
   Widget _buildButtons(BuildContext context, BookBloc bookBloc) =>
