@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A class displaying the top section of the login page.
 class LoginHeader extends StatelessWidget {
+  /// Creates a top header.
   const LoginHeader({Key key}) : super(key: key);
 
   @override
@@ -22,10 +24,10 @@ class LoginHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildText() => Padding(
-        padding: const EdgeInsets.only(top: 13, bottom: 64),
+  Widget _buildText() => const Padding(
+        padding: EdgeInsets.only(top: 16, bottom: 64),
         child: Text(
-          'BTR490 Books',
+          'The Library',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
         ),

@@ -14,7 +14,7 @@ void main() {
     final iconFinder = find.byIcon(Icons.library_books);
     expect(iconFinder, findsOneWidget);
 
-    final textFinder = find.text('BTR490 Books');
+    final textFinder = find.text('The Library');
     expect(textFinder, findsOneWidget);
   });
 }

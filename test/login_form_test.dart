@@ -25,7 +25,7 @@ void main() {
     final buttonFinder = find.byType(RaisedButton);
     expect(buttonFinder, findsOneWidget);
 
-    const buttonText = 'Login';
+    const buttonText = 'LOGIN';
     final buttonTextFinder = find.text(buttonText);
     expect(buttonTextFinder, findsOneWidget);
   });
@@ -33,7 +33,7 @@ void main() {
   testWidgets('Email and password error message smoke test', (tester) async {
     await tester.pumpWidget(widget);
 
-    final loginButtonFinder = find.text('Login');
+    final loginButtonFinder = find.text('LOGIN');
     await tester.tap(loginButtonFinder);
 
     await tester.pump();
