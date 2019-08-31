@@ -70,11 +70,9 @@ class DetailPage extends StatelessWidget {
         child: Text(book.description),
       );
 
-  Widget _buildBuyButton() => ButtonTheme(
-        child: RaisedButton(
-          onPressed: _launchUrl,
-          child: const Text('Buy Now'),
-        ),
+  Widget _buildBuyButton() => RaisedButton(
+        onPressed: _launchUrl,
+        child: const Text('Buy Now'),
       );
 
   Future<void> _launchUrl() async {

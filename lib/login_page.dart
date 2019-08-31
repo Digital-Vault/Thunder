@@ -9,18 +9,15 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Book Store Login',
-        home: Scaffold(
-          body: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                children: const [
-                  LoginHeader(),
-                  LoginForm(),
-                ],
-              ),
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              children: const [
+                LoginHeader(),
+                LoginForm(),
+              ],
             ),
           ),
         ),
