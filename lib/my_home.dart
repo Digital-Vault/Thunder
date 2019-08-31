@@ -25,13 +25,8 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: _buildAppBar(),
         body: _buildBody(),
         bottomNavigationBar: _buildBottomNavigation(),
-      );
-
-  Widget _buildAppBar() => AppBar(
-        title: const Text('Book Store'),
       );
 
   Widget _buildBody() {
