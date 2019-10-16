@@ -19,7 +19,7 @@ class LoginHeader extends StatelessWidget {
     final size = MediaQuery.of(context).size.width / 5;
 
     return Icon(
-      Icons.library_books,
+      Icons.cloud_queue,
       size: size,
     );
   }
@@ -27,7 +27,7 @@ class LoginHeader extends StatelessWidget {
   Widget _buildText() => const Padding(
         padding: EdgeInsets.only(top: 16, bottom: 64),
         child: Text(
-          'The Library',
+          'Thunder',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
         ),
